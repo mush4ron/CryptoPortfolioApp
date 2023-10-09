@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/portfolioFragment">
+
+    <fragment
+        android:id="@+id/newAssetFragment"
+        android:name="com.rxs.cryptoportfolioapp.NewAssetFragment"
+        android:label="fragment_new_asset"
+        tools:layout="@layout/fragment_new_asset" />
+    <fragment
+        android:id="@+id/portfolioFragment"
+        android:name="com.rxs.cryptoportfolioapp.PortfolioFragment"
+        android:label="fragment_portfolio"
+        tools:layout="@layout/fragment_portfolio" />
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="com.rxs.cryptoportfolioapp.RankingFragment"
+        android:label="fragment_ranking"
+        tools:layout="@layout/fragment_ranking" />
+</navigation>

@@ -6,6 +6,9 @@
 
     <!-- Text -->
     <color name="dark_text">#100118</color>
+    
+    <!-- Fragment Ranking List -->
+    <color name="ranking_list_titles">#6B6B6B</color>
 
     <!-- Item Ranking List -->
     <color name="ranking_list_item_background">#F2F2F7</color>

@@ -1,12 +1,9 @@
 package com.rxs.cryptoportfolioapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rxs.cryptoportfolioapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

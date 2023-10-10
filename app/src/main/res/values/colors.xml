@@ -4,6 +4,6 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="bottom_menu">#BABABA</color>
-
+    <color name="bottom_menu_inactive">#BABABA</color>
+    <color name="bottom_menu_active">#814EBB</color>
 </resources>

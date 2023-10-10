@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Text -->
+    <style name="BaseText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/dark_text</item>
+    </style>
+
+    <style name="Title1" parent="BaseText">
+        <item name="android:textSize">19sp</item>
+        <item name="fontFamily">@font/inter_semibold</item>
+        <item name="lineHeight">26sp</item>
+    </style>
+
+    <style name="Title2" parent="BaseText">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/inter_semibold</item>
+        <item name="lineHeight">23sp</item>
+        <item name="android:textColor">@color/dark_text</item>
+    </style>
+
+    <style name="Caption1" parent="BaseText">
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">@font/inter</item>
+        <item name="lineHeight">16sp</item>
+        <item name="android:textColor">@color/dark_text</item>
+    </style>
+
+    <style name="Caption2" parent="BaseText">
+        <item name="android:textSize">13sp</item>
+        <item name="fontFamily">@font/inter</item>
+        <item name="lineHeight">16sp</item>
+        <item name="android:textColor">@color/dark_text</item>
+    </style>
+
+    <!-- Item Ranking List -->
+
+    <style name="GoodChange" parent="Caption2">
+        <item name="android:background">@drawable/item_ranking_list_change24_shape</item>
+        <item name="backgroundTint">@color/good_change_background</item>
+        <item name="android:textColor">@color/good_change_text</item>
+    </style>
+
+    <style name="BadChange" parent="Caption2">
+        <item name="android:background">@drawable/item_ranking_list_change24_shape</item>
+        <item name="backgroundTint">@color/bad_change_background</item>
+        <item name="android:textColor">@color/bad_change_text</item>
+    </style>
+
+    <!-- Bottom Menu -->
     <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
         <item name="android:background">@color/white</item>
         <item name="itemTextColor">@color/bottom_menu_text</item>

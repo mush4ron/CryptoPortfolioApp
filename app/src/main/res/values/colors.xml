@@ -4,6 +4,17 @@
     <color name="white">#FFFFFFFF</color>
 
 
+    <!-- Text -->
+    <color name="dark_text">#100118</color>
+
+    <!-- Item Ranking List -->
+    <color name="ranking_list_item_background">#F2F2F7</color>
+    <color name="good_change_background">#BADDD0</color>
+    <color name="good_change_text">#0F4A35</color>
+    <color name="bad_change_background">#FFCACA</color>
+    <color name="bad_change_text">#FF2D52</color>
+
+    <!-- Bottom Menu -->
     <color name="bottom_menu_inactive">#BABABA</color>
     <color name="bottom_menu_active">#814EBB</color>
 </resources>

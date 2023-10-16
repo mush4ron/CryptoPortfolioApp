@@ -1,12 +1,14 @@
 package com.rxs.cryptoportfolioapp.presentation.ranking_list
 
-import android.annotation.SuppressLint
+import android.icu.text.NumberFormat
+import android.os.Build
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.rxs.cryptoportfolio.domain.model.Coin
 import com.rxs.cryptoportfolioapp.databinding.ItemRankingListBinding
+import java.util.Locale
 import javax.inject.Inject
 
 class RankingListAdapter @Inject constructor() :
@@ -18,10 +20,24 @@ class RankingListAdapter @Inject constructor() :
 
     inner class RankingListViewHolder : RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(coin: Coin) = binding.apply {
+        fun setData(coin: Coin, position: Int) = binding.apply {
+            tvItemRankingListPosition.text = (position + 1).toString()
             tvItemRankingListSymbol.text = coin.symbol
-            tvItemRankingListPrice.text = coin.price.toString()
-            tvItemRankingListChange24.text = "24.45%"
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                val numberFormat = NumberFormat.getCurrencyInstance(Locale.US)
+                if ((coin.price * 10000).toInt() <= 0) numberFormat.maximumFractionDigits = 8
+                else if (coin.price.toInt() <= 0) numberFormat.maximumFractionDigits = 4
+                tvItemRankingListPrice.text = numberFormat.format(coin.price)
+            }
+            if (coin.percentChange24 >= 0) {
+                tvItemRankingListChange24Bad.visibility = View.GONE
+                tvItemRankingListChange24Good.text = "${coin.percentChange24}%"
+                tvItemRankingListChange24Good.visibility = View.VISIBLE
+            } else {
+                tvItemRankingListChange24Good.visibility = View.GONE
+                tvItemRankingListChange24Bad.text = "${coin.percentChange24}%"
+                tvItemRankingListChange24Bad.visibility = View.VISIBLE
+            }
         }
 
     }
@@ -35,35 +51,20 @@ class RankingListAdapter @Inject constructor() :
         return coinsList.size
     }
 
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     override fun onBindViewHolder(holder: RankingListViewHolder, position: Int) {
-        holder.setData(coin = coinsList[position])
+        holder.setData(coin = coinsList[position], position = position)
     }
 
     fun submitData(data: List<Coin>) {
-        val newsDiffUtil = NewsDiffUtils(coinsList, data)
-        val diffUtils = DiffUtil.calculateDiff(newsDiffUtil)
         coinsList = data
-        diffUtils.dispatchUpdatesTo(this)
-    }
-
-    class NewsDiffUtils(
-        private val oldItem: List<Coin>,
-        private val newItem: List<Coin>
-    ) : DiffUtil.Callback() {
-        override fun getOldListSize(): Int {
-            return oldItem.size
-        }
-
-        override fun getNewListSize(): Int {
-            return newItem.size
-        }
-
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldItem[oldItemPosition] === newItem[newItemPosition]
-        }
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldItem[oldItemPosition] === newItem[newItemPosition]
-        }
+        notifyDataSetChanged()
     }
 }

@@ -1,4 +1,4 @@
-package com.rxs.cryptoportfolio.data.remote.dto
+package com.rxs.cryptoportfolioapp.data.remote.dto
 
 data class Status(
     val credit_count: Int,

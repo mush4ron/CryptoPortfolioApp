@@ -1,4 +1,6 @@
-package com.rxs.cryptoportfolio.data.remote.dto
+package com.rxs.cryptoportfolioapp.data.remote.dto
+
+import com.rxs.cryptoportfolioapp.data.remote.dto.Quote
 
 data class Data(
     val circulating_supply: Double,

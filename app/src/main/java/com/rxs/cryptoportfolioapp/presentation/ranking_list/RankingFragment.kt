@@ -1,13 +1,16 @@
 package com.rxs.cryptoportfolioapp.presentation.ranking_list
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rxs.cryptoportfolioapp.common.Resource
 import com.rxs.cryptoportfolioapp.databinding.FragmentRankingBinding
+import com.rxs.cryptoportfolioapp.presentation.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -15,10 +18,10 @@ import javax.inject.Inject
 class RankingFragment : Fragment() {
 
     private lateinit var binding: FragmentRankingBinding
-    private val viewModel: RankingViewModel by viewModels()
+    private val rankingViewModel: RankingViewModel by viewModels()
 
     @Inject
-    lateinit var rankingListAdapter: RankingListAdapter
+    lateinit var rankingAdapter: RankingListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,15 +29,37 @@ class RankingFragment : Fragment() {
     ): View? {
         binding = FragmentRankingBinding.inflate(layoutInflater)
         setupView()
-        observeState()
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeState()
+    }
+
     private fun observeState() {
-        val state = viewModel.state.value
-        rankingListAdapter.submitData(state.coins)
-        if (state.error.isNotBlank()) {
-            binding.tvFragmentRankingError.text = state.error
+        rankingViewModel.coinsData.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> {
+                    binding.pbFragmentRanking.visibility = View.VISIBLE
+                }
+
+                is Resource.Success -> {
+                    Log.d("AAA", "SUCCESS")
+                    it.data?.let { it1 -> rankingAdapter.submitData(it1) }
+                    binding.pbFragmentRanking.visibility = View.GONE
+                    binding.rvFragmentRanking.visibility = View.VISIBLE
+                }
+
+                is Resource.Error -> {
+                    binding.pbFragmentRanking.visibility = View.GONE
+                    binding.tvFragmentRankingError.apply {
+                        visibility = View.VISIBLE
+                        text = it.message
+                    }
+
+                }
+            }
         }
     }
 
@@ -46,7 +71,7 @@ class RankingFragment : Fragment() {
                     LinearLayoutManager.VERTICAL,
                     false
                 )
-            adapter = rankingListAdapter
+            adapter = rankingAdapter
         }
     }
 

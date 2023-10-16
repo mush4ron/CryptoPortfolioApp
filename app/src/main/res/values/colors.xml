@@ -6,9 +6,11 @@
 
     <!-- Text -->
     <color name="dark_text">#100118</color>
-    
+
+
     <!-- Fragment Ranking List -->
     <color name="ranking_list_titles">#6B6B6B</color>
+
 
     <!-- Item Ranking List -->
     <color name="ranking_list_item_background">#F2F2F7</color>
@@ -16,6 +18,10 @@
     <color name="good_change_text">#0F4A35</color>
     <color name="bad_change_background">#FFCACA</color>
     <color name="bad_change_text">#FF2D52</color>
+    <color name="spinner_ring_start">#33CC7EFD</color>
+    <color name="spinner_ring_center">#A771ED</color>
+    <color name="spinner_ring_end">#4D3C1C9B</color>
+
 
     <!-- Bottom Menu -->
     <color name="bottom_menu_inactive">#BABABA</color>

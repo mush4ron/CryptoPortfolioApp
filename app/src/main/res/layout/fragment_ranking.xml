@@ -4,10 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RankingFragment">
+    tools:context=".presentation.ranking_list.RankingFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_fragment_ranking_error"
+        style="@style/Caption2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Error here"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_fragment_ranking_main_title"
+        app:layout_constraintStart_toEndOf="@+id/tv_fragment_ranking_main_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_fragment_ranking_main_title" />
+
+    <TextView
+        android:id="@+id/tv_fragment_ranking_main_title"
         style="@style/Title1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,10 +39,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/tv_fragment_ranking_main_title">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_fragment_ranking_subtitle1"
             style="@style/Caption2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +54,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv_fragment_ranking_subtitle2"
             style="@style/Caption2"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
@@ -52,12 +63,12 @@
             android:textAlignment="center"
             android:textColor="@color/ranking_list_titles"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView4"
+            app:layout_constraintEnd_toStartOf="@+id/tv_fragment_ranking_subtitle3"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_fragment_ranking_subtitle3"
             style="@style/Caption2"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
@@ -71,6 +82,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_fragment_ranking"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"

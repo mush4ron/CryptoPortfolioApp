@@ -1,11 +1,14 @@
-package com.rxs.cryptoportfolioapp
+package com.rxs.cryptoportfolioapp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.rxs.cryptoportfolioapp.R
 import com.rxs.cryptoportfolioapp.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

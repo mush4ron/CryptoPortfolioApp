@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_portfolio" />
     <fragment
         android:id="@+id/rankingFragment"
-        android:name="com.rxs.cryptoportfolioapp.RankingFragment"
+        android:name="com.rxs.cryptoportfolioapp.presentation.ranking_list.RankingFragment"
         android:label="fragment_ranking"
         tools:layout="@layout/fragment_ranking" />
 </navigation>

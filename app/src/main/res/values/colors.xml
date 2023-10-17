@@ -23,6 +23,14 @@
     <color name="spinner_ring_end">#4D3C1C9B</color>
 
 
+    <!-- Fragment Portfolio -->
+    <color name="portfolio_cl_background">#F2F2F7</color>
+
+
+    <!-- Item Portfolio Asset -->
+    <color name="bad_profit_text">#FF2D52</color>
+    <color name="good_profit_text">#0F4A35</color>
+
     <!-- Bottom Menu -->
     <color name="bottom_menu_inactive">#BABABA</color>
     <color name="bottom_menu_active">#814EBB</color>

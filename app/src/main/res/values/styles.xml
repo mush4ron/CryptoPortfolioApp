@@ -2,6 +2,7 @@
 <resources>
 
     <!-- Text -->
+
     <style name="BaseText" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/dark_text</item>
     </style>
@@ -33,19 +34,37 @@
         <item name="android:textColor">@color/dark_text</item>
     </style>
 
+
     <!-- Item Ranking List -->
 
-    <style name="GoodChange" parent="Caption2">
+    <style name="GoodChange24" parent="Caption2">
         <item name="android:background">@drawable/item_ranking_list_change24_shape</item>
         <item name="backgroundTint">@color/good_change_background</item>
         <item name="android:textColor">@color/good_change_text</item>
     </style>
 
-    <style name="BadChange" parent="Caption2">
+    <style name="BadChange24" parent="Caption2">
         <item name="android:background">@drawable/item_ranking_list_change24_shape</item>
         <item name="backgroundTint">@color/bad_change_background</item>
         <item name="android:textColor">@color/bad_change_text</item>
     </style>
+
+
+    <!-- PortfolioFragment -->
+
+    <style name="GoodChange" parent="GoodChange24">
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:paddingEnd">4dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+    </style>
+
+    <style name="BadChange" parent="BadChange24">
+        <item name="android:background">@drawable/item_ranking_list_change24_shape</item>
+        <item name="backgroundTint">@color/bad_change_background</item>
+        <item name="android:textColor">@color/bad_change_text</item>
+    </style>
+
 
     <!-- Bottom Menu -->
     <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView.Colored">

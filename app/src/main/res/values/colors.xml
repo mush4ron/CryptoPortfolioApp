@@ -25,6 +25,7 @@
 
     <!-- Fragment Portfolio -->
     <color name="portfolio_cl_background">#F2F2F7</color>
+    <color name="portfolio_message_text">#6B6B6B</color>
 
 
     <!-- Item Portfolio Asset -->

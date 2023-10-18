@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PortfolioFragment">
+    tools:context=".presentation.portfolio.PortfolioFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_fragment_portfolio_invested"
@@ -75,7 +75,6 @@
 
     <Button
         android:id="@+id/btn_fragment_portfolio_invest"
-        style="@style/PurpleButton"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -174,7 +173,6 @@
 
     <Button
         android:id="@+id/btn_fragment_portfolio_withdraw"
-        style="@style/RedButton"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

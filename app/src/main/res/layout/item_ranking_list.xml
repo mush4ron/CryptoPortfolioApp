@@ -9,7 +9,7 @@
     android:backgroundTint="@color/ranking_list_item_background">
 
     <TextView
-        android:id="@+id/tv_item_portfolio_asset_position"
+        android:id="@+id/tv_item_ranking_list_position"
         style="@style/Caption2"
         android:layout_width="34dp"
         android:layout_height="wrap_content"
@@ -21,19 +21,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_item_portfolio_asset_symbol"
+        android:id="@+id/tv_item_ranking_list_symbol"
         style="@style/Caption1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/inter"
         android:text="BTC"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_item_portfolio_asset_position"
-        app:layout_constraintStart_toEndOf="@+id/tv_item_portfolio_asset_position"
-        app:layout_constraintTop_toTopOf="@+id/tv_item_portfolio_asset_position" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_ranking_list_position"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_ranking_list_position"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_ranking_list_position" />
 
     <TextView
-        android:id="@+id/tv_item_portfolio_asset_change_bad"
+        android:id="@+id/tv_item_ranking_list_change24_bad"
         style="@style/BadChange24"
         android:layout_width="68dp"
         android:layout_height="35dp"
@@ -47,7 +47,7 @@
         app:layout_constraintVertical_bias="0.5" />
 
     <TextView
-        android:id="@+id/tv_item_portfolio_asset_change_good"
+        android:id="@+id/tv_item_ranking_list_change24_good"
         style="@style/GoodChange24"
         android:layout_width="70dp"
         android:layout_height="35dp"
@@ -62,7 +62,7 @@
         app:layout_constraintVertical_bias="0.5" />
 
     <TextView
-        android:id="@+id/tv_item_portfolio_asset_current_price"
+        android:id="@+id/tv_item_ranking_list_price"
         style="@style/Title2"
         android:layout_width="120dp"
         android:layout_height="wrap_content"

@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_new_asset" />
     <fragment
         android:id="@+id/portfolioFragment"
-        android:name="com.rxs.cryptoportfolioapp.PortfolioFragment"
+        android:name="com.rxs.cryptoportfolioapp.presentation.portfolio.PortfolioFragment"
         android:label="fragment_portfolio"
         tools:layout="@layout/fragment_portfolio" />
     <fragment

@@ -32,6 +32,11 @@
     <color name="bad_profit_text">#FF2D52</color>
     <color name="good_profit_text">#0F4A35</color>
 
+    <!-- Buttons -->
+    <color name="base_button">#BABABA</color>
+    <color name="red_button">#FF4040</color>
+    <color name="purple_button">#814EBB</color>
+
     <!-- Bottom Menu -->
     <color name="bottom_menu_inactive">#BABABA</color>
     <color name="bottom_menu_active">#814EBB</color>

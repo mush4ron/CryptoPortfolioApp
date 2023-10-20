@@ -75,10 +75,12 @@
 
     <Button
         android:id="@+id/btn_fragment_portfolio_invest"
+        style="@style/PurpleButton"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Пополнить"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/cl_fragment_portfolio_invested"
         app:layout_constraintStart_toStartOf="@+id/cl_fragment_portfolio_invested"
         app:layout_constraintTop_toBottomOf="@+id/cl_fragment_portfolio_invested" />
@@ -173,10 +175,12 @@
 
     <Button
         android:id="@+id/btn_fragment_portfolio_withdraw"
+        style="@style/RedButton"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Вывести"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/cl_fragment_portfolio_current"
         app:layout_constraintStart_toStartOf="@+id/cl_fragment_portfolio_current"
         app:layout_constraintTop_toBottomOf="@+id/cl_fragment_portfolio_current" />

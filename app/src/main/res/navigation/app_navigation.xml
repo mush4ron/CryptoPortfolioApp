@@ -10,14 +10,26 @@
         android:name="com.rxs.cryptoportfolioapp.NewAssetFragment"
         android:label="fragment_new_asset"
         tools:layout="@layout/fragment_new_asset" />
+
     <fragment
         android:id="@+id/portfolioFragment"
         android:name="com.rxs.cryptoportfolioapp.presentation.portfolio.PortfolioFragment"
         android:label="fragment_portfolio"
-        tools:layout="@layout/fragment_portfolio" />
+        tools:layout="@layout/fragment_portfolio">
+        <action
+            android:id="@+id/action_portfolioFragment_to_investDialogFragment"
+            app:destination="@id/investDialogFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/rankingFragment"
         android:name="com.rxs.cryptoportfolioapp.presentation.ranking_list.RankingFragment"
         android:label="fragment_ranking"
         tools:layout="@layout/fragment_ranking" />
+
+    <dialog
+        android:id="@+id/investDialogFragment"
+        android:name="com.rxs.cryptoportfolioapp.presentation.portfolio.InvestDialogFragment"
+        android:label="fragment_invest_dialog"
+        tools:layout="@layout/fragment_invest_dialog" />
 </navigation>

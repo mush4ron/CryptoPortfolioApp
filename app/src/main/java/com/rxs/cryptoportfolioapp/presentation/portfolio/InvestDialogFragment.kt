@@ -11,11 +11,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import com.rxs.cryptoportfolioapp.databinding.FragmentInvestDialogBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InvestDialogFragment : DialogFragment() {
 
     private lateinit var binding: FragmentInvestDialogBinding
+    private val viewModel: PortfolioViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +35,11 @@ class InvestDialogFragment : DialogFragment() {
     private fun setupButtons() {
         binding.apply {
             btnDialogInvestInvest.setOnClickListener {
-
+                val value = binding.etDialogInvestValue.text.toString()
+                if (value.isNotBlank()) {
+                    viewModel.addBalance(value.toInt())
+                    dismiss()
+                }
             }
 
             btnDialogInvestBack.setOnClickListener {

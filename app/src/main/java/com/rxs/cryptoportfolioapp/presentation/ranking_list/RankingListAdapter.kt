@@ -1,13 +1,12 @@
 package com.rxs.cryptoportfolioapp.presentation.ranking_list
 
-import android.icu.text.NumberFormat
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rxs.cryptoportfolio.domain.model.Coin
 import com.rxs.cryptoportfolioapp.databinding.ItemRankingListBinding
+import java.text.NumberFormat
 import java.util.Locale
 import javax.inject.Inject
 
@@ -23,12 +22,10 @@ class RankingListAdapter @Inject constructor() :
         fun setData(coin: Coin, position: Int) = binding.apply {
             tvItemRankingListPosition.text = (position + 1).toString()
             tvItemRankingListSymbol.text = coin.symbol
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                val numberFormat = NumberFormat.getCurrencyInstance(Locale.US)
-                if ((coin.price * 10000).toInt() <= 0) numberFormat.maximumFractionDigits = 8
-                else if (coin.price.toInt() <= 0) numberFormat.maximumFractionDigits = 4
-                tvItemRankingListPrice.text = numberFormat.format(coin.price)
-            }
+            val numberFormat = NumberFormat.getCurrencyInstance(Locale.US)
+            if ((coin.price * 10000).toInt() <= 0) numberFormat.maximumFractionDigits = 8
+            else if (coin.price.toInt() <= 0) numberFormat.maximumFractionDigits = 4
+            tvItemRankingListPrice.text = numberFormat.format(coin.price)
             if (coin.percentChange24 >= 0) {
                 tvItemRankingListChange24Bad.visibility = View.GONE
                 tvItemRankingListChange24Good.text = "${coin.percentChange24}%"

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.rxs.cryptoportfolioapp.R
+import com.rxs.cryptoportfolioapp.common.Constants
 import com.rxs.cryptoportfolioapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        applicationContext.getSharedPreferences(Constants.SHARED_KEY, 0).edit().clear().apply()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

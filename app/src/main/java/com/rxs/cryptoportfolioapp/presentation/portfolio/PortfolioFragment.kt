@@ -1,12 +1,10 @@
 package com.rxs.cryptoportfolioapp.presentation.portfolio
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.rxs.cryptoportfolioapp.R
 import com.rxs.cryptoportfolioapp.databinding.FragmentPortfolioBinding
@@ -39,8 +37,8 @@ class PortfolioFragment : Fragment() {
     }
 
     private fun startObserve() {
-        viewModel.balance.observe(viewLifecycleOwner) {
-            binding.tvFragmentPortfolioInvestedBalance.text = it.toBalanceText()
+        viewModel.portfolio.observe(viewLifecycleOwner) {
+            binding.tvFragmentPortfolioInvestedBalance.text = it.balance.toBalanceText()
         }
     }
 
@@ -48,6 +46,11 @@ class PortfolioFragment : Fragment() {
         binding.btnFragmentPortfolioInvest.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_portfolioFragment_to_investDialogFragment)
+        }
+
+        binding.btnFragmentPortfolioWithdraw.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_portfolioFragment_to_withdrawDialogFragment)
         }
     }
 }

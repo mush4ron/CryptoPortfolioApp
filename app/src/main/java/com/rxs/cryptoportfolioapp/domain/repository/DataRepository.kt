@@ -1,8 +1,10 @@
 package com.rxs.cryptoportfolioapp.domain.repository
 
+import com.rxs.cryptoportfolioapp.data.sharedprefs.model.Portfolio
+
 interface DataRepository {
 
-    suspend fun save(value: Int)
+    suspend fun save(data: Portfolio)
 
-    suspend fun get(): Int
+    suspend fun get(): Portfolio
 }

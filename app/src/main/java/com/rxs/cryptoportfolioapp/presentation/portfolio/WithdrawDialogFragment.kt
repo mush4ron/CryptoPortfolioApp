@@ -1,6 +1,5 @@
 package com.rxs.cryptoportfolioapp.presentation.portfolio
 
-
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,23 +10,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
-import com.rxs.cryptoportfolioapp.databinding.FragmentInvestDialogBinding
+import com.rxs.cryptoportfolioapp.databinding.FragmentWithdrawDialogBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class InvestDialogFragment : DialogFragment() {
+class WithdrawDialogFragment : DialogFragment() {
 
-    private lateinit var binding: FragmentInvestDialogBinding
+    private lateinit var binding: FragmentWithdrawDialogBinding
 
     @Inject
     lateinit var viewModel: PortfolioViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentInvestDialogBinding.inflate(layoutInflater)
+        binding = FragmentWithdrawDialogBinding.inflate(layoutInflater)
         setupStyle()
         setupButtons()
 
@@ -36,15 +36,15 @@ class InvestDialogFragment : DialogFragment() {
 
     private fun setupButtons() {
         binding.apply {
-            btnDialogInvestInvest.setOnClickListener {
-                val value = binding.etDialogInvestValue.text.toString()
+            btnDialogWithdrawWithdraw.setOnClickListener {
+                val value = binding.etDialogWithdrawValue.text.toString()
                 if (value.isNotBlank()) {
-                    viewModel.addBalance(value = value.toInt())
+                    viewModel.withdrawBalance(value = value.toInt())
                 }
                 dismiss()
             }
 
-            btnDialogInvestBack.setOnClickListener {
+            btnDialogWithdrawBack.setOnClickListener {
                 dismiss()
             }
         }

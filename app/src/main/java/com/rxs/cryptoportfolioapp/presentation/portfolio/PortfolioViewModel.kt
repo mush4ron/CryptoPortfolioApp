@@ -4,30 +4,35 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
+import androidx.lifecycle.viewModelScope
+import com.rxs.cryptoportfolioapp.domain.usecase.GetPortfolioUseCase
+import com.rxs.cryptoportfolioapp.domain.usecase.SavePortfolioUseCase
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Singleton
 
-@HiltViewModel
+@Singleton
 class PortfolioViewModel @Inject constructor(
-    private val prefsRepository: SharedPreferencesRepository
+    private val getPortfolioUseCase: GetPortfolioUseCase,
+    private val savePortfolioUseCase: SavePortfolioUseCase
 ) : ViewModel() {
 
     private val _balance = MutableLiveData<Int>()
     val balance: LiveData<Int> = _balance
 
     init {
-        initBalance()
-    }
-
-    private fun initBalance() {
-        _balance.value = prefsRepository.get()
+        viewModelScope.launch {
+            _balance.value = getPortfolioUseCase() ?: 0
+        }
     }
 
 
     fun addBalance(addingValue: Int) {
         _balance.value?.plus(addingValue)?.let {
-            prefsRepository.save(it)
-            Log.d("VM", "Save $it")
+            _balance.value = it
+            viewModelScope.launch {
+                savePortfolioUseCase(it)
+            }
         }
     }
 }

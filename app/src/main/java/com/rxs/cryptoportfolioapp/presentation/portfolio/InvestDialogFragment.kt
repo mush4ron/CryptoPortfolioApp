@@ -4,6 +4,7 @@ package com.rxs.cryptoportfolioapp.presentation.portfolio
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -14,12 +15,15 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.rxs.cryptoportfolioapp.databinding.FragmentInvestDialogBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class InvestDialogFragment : DialogFragment() {
 
     private lateinit var binding: FragmentInvestDialogBinding
-    private val viewModel: PortfolioViewModel by viewModels()
+
+    @Inject
+    lateinit var viewModel: PortfolioViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +42,8 @@ class InvestDialogFragment : DialogFragment() {
                 val value = binding.etDialogInvestValue.text.toString()
                 if (value.isNotBlank()) {
                     viewModel.addBalance(value.toInt())
-                    dismiss()
                 }
+                dismiss()
             }
 
             btnDialogInvestBack.setOnClickListener {
@@ -64,10 +68,4 @@ class InvestDialogFragment : DialogFragment() {
         layoutParams?.y = marginInPixels
         dialog?.window?.attributes = layoutParams
     }
-
-    companion object {
-        const val TAG = "PurchaseConfirmationDialog"
-    }
-
-
 }

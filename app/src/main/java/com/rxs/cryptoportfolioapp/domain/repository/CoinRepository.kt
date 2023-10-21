@@ -1,4 +1,4 @@
-package com.rxs.cryptoportfolio.domain.repository
+package com.rxs.cryptoportfolioapp.domain.repository
 
 import com.rxs.cryptoportfolioapp.data.remote.dto.ListCoinDto
 

@@ -1,6 +1,7 @@
 package com.rxs.cryptoportfolioapp.presentation.portfolio
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +13,15 @@ import com.rxs.cryptoportfolioapp.databinding.FragmentPortfolioBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.util.Locale
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PortfolioFragment : Fragment() {
 
     private lateinit var binding: FragmentPortfolioBinding
-    private val viewModel: PortfolioViewModel by viewModels()
+
+    @Inject
+    lateinit var viewModel: PortfolioViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

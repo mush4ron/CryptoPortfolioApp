@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/background_support"
-    app:cardCornerRadius="5dp"
+    app:cardCornerRadius="10dp"
     tools:context=".presentation.portfolio.InvestDialogFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout

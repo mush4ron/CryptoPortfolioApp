@@ -19,43 +19,7 @@
     <color name="green_light">#BADDD0</color>
 
 
-    <!-- Text -->
-    <color name="dark_text">#100118</color>
-
-
-    <!-- Fragment Ranking List -->
-    <color name="ranking_list_titles">#6B6B6B</color>
-
-
-    <!-- Item Ranking List -->
-    <color name="ranking_list_item_background">#F2F2F7</color>
-    <color name="good_change_background">#BADDD0</color>
-    <color name="good_change_text">#0F4A35</color>
-    <color name="bad_change_background">#FFCACA</color>
-    <color name="bad_change_text">#FF2D52</color>
     <color name="spinner_ring_start">#33CC7EFD</color>
     <color name="spinner_ring_center">#A771ED</color>
     <color name="spinner_ring_end">#4D3C1C9B</color>
-
-
-    <!-- Fragment Portfolio -->
-    <color name="portfolio_cl_background">#F2F2F7</color>
-    <color name="portfolio_message_text">#6B6B6B</color>
-
-
-    <!-- Item Portfolio Asset -->
-    <color name="bad_profit_text">#FF2D52</color>
-    <color name="good_profit_text">#0F4A35</color>
-
-    <!-- Buttons -->
-    <color name="base_button">#BABABA</color>
-    <color name="red_button">#FF4040</color>
-    <color name="purple_button">#814EBB</color>
-
-
-    <color name="edit_text_stroke">#6B6B6B</color>
-
-    <!-- Bottom Menu -->
-    <color name="bottom_menu_inactive">#BABABA</color>
-    <color name="bottom_menu_active">#814EBB</color>
 </resources>

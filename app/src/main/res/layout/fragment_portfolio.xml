@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".presentation.portfolio.PortfolioFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,7 +13,8 @@
         android:layout_height="200dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/fragment_portfolio_cl_shape"
+        android:background="@drawable/shape_element"
+        android:backgroundTint="@color/background_support"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -68,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:text="Ср. цена покупки"
+            android:textColor="@color/white50"
             app:layout_constraintBottom_toTopOf="@+id/tv_fragment_portfolio_invested_rate"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -91,7 +94,8 @@
         android:layout_height="200dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/fragment_portfolio_cl_shape"
+        android:background="@drawable/shape_element"
+        android:backgroundTint="@color/background_support"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -168,6 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:text="Текущий курс"
+            android:textColor="@color/white50"
             app:layout_constraintBottom_toTopOf="@+id/tv_fragment_portfolio_current_rate"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -216,7 +221,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Добавьте свой первый актив"
-        android:textColor="@color/portfolio_message_text"
+        android:textColor="@color/white50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

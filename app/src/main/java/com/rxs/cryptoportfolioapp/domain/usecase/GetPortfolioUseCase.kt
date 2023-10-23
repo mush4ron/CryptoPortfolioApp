@@ -1,7 +1,7 @@
 package com.rxs.cryptoportfolioapp.domain.usecase
 
 import com.rxs.cryptoportfolioapp.common.DispatcherProvider
-import com.rxs.cryptoportfolioapp.data.sharedprefs.model.Portfolio
+import com.rxs.cryptoportfolioapp.data.sharedprefs.Portfolio
 import com.rxs.cryptoportfolioapp.domain.repository.DataRepository
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

@@ -1,6 +1,6 @@
 package com.rxs.cryptoportfolioapp.domain.repository
 
-import com.rxs.cryptoportfolioapp.data.sharedprefs.model.Portfolio
+import com.rxs.cryptoportfolioapp.data.sharedprefs.Portfolio
 
 interface DataRepository {
 

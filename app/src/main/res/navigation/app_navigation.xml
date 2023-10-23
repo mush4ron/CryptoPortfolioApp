@@ -9,7 +9,11 @@
         android:id="@+id/newAssetFragment"
         android:name="com.rxs.cryptoportfolioapp.NewAssetFragment"
         android:label="fragment_new_asset"
-        tools:layout="@layout/fragment_new_asset" />
+        tools:layout="@layout/fragment_new_asset" >
+        <action
+            android:id="@+id/action_newAssetFragment_to_newAssetValueFragment"
+            app:destination="@id/newAssetValueFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/portfolioFragment"
@@ -41,4 +45,9 @@
         android:name="com.rxs.cryptoportfolioapp.presentation.portfolio.WithdrawDialogFragment"
         android:label="fragment_withdraw_dialog"
         tools:layout="@layout/fragment_withdraw_dialog" />
+    <fragment
+        android:id="@+id/newAssetValueFragment"
+        android:name="com.rxs.cryptoportfolioapp.NewAssetValueFragment"
+        android:label="fragment_new_asset_value"
+        tools:layout="@layout/fragment_new_asset_value" />
 </navigation>

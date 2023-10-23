@@ -1,11 +1,10 @@
 package com.rxs.cryptoportfolioapp.presentation.portfolio
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rxs.cryptoportfolioapp.data.sharedprefs.model.Portfolio
+import com.rxs.cryptoportfolioapp.data.sharedprefs.Portfolio
 import com.rxs.cryptoportfolioapp.domain.usecase.GetPortfolioUseCase
 import com.rxs.cryptoportfolioapp.domain.usecase.SavePortfolioUseCase
 import kotlinx.coroutines.launch

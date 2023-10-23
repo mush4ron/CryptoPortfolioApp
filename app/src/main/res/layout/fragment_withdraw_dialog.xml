@@ -4,20 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/background_support"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
     tools:context=".presentation.portfolio.WithdrawDialogFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background_support">
 
         <TextView
             android:id="@+id/tv_dialog_withdraw_title"
             style="@style/Title2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="32dp"
             android:text="Введите сумму"
             android:textAllCaps="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,8 +29,9 @@
         <EditText
             android:id="@+id/et_dialog_withdraw_value"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginTop="16dp"
+            android:background="@drawable/shape_edittext"
             android:ems="10"
             android:inputType="number|numberSigned"
             app:layout_constraintEnd_toEndOf="@+id/btn_dialog_withdraw_withdraw"
@@ -41,9 +44,9 @@
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="64dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
             android:text="Назад"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_dialog_withdraw_withdraw"
@@ -56,10 +59,10 @@
             style="@style/RedButton"
             android:layout_width="150dp"
             android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="64dp"
+            android:layout_marginBottom="32dp"
             android:text="Вывести"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

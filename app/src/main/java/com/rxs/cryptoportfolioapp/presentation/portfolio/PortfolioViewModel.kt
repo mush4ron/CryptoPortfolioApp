@@ -4,12 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rxs.cryptoportfolioapp.data.sharedprefs.Portfolio
+import com.rxs.cryptoportfolioapp.data.shared_prefs.Portfolio
 import com.rxs.cryptoportfolioapp.domain.usecase.GetPortfolioUseCase
 import com.rxs.cryptoportfolioapp.domain.usecase.SavePortfolioUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.math.roundToInt
 
 @Singleton
 class PortfolioViewModel @Inject constructor(
@@ -27,9 +28,18 @@ class PortfolioViewModel @Inject constructor(
     }
 
 
-    fun addBalance(value: Int) {
+    fun addBalance(value: Int, valueUsdt: Double) {
+        val newBalance = _portfolio.value!!.balance.plus(value)
+        val oldUsdtBalance = if (_portfolio.value!!.averageUsdt != 0.0) {
+            _portfolio.value!!.balance / _portfolio.value!!.averageUsdt
+        } else {
+            0.0
+        }
+        val newAverageUsdt =
+            (newBalance / (oldUsdtBalance + valueUsdt) * 100.0).roundToInt() / 100.0
+
         _portfolio.value =
-            Portfolio(_portfolio.value!!.balance.plus(value), _portfolio.value!!.averageUsdt)
+            Portfolio(balance = newBalance, averageUsdt = newAverageUsdt)
 
         viewModelScope.launch {
             savePortfolioUseCase(data = _portfolio.value)
@@ -37,8 +47,11 @@ class PortfolioViewModel @Inject constructor(
     }
 
     fun withdrawBalance(value: Int) {
+        val newBalance = _portfolio.value!!.balance.plus(value)
+        val averageUsdt = _portfolio.value!!.averageUsdt
+
         _portfolio.value =
-            Portfolio(_portfolio.value!!.balance.minus(value), _portfolio.value!!.averageUsdt)
+            Portfolio(balance = newBalance, averageUsdt = averageUsdt)
 
         viewModelScope.launch {
             savePortfolioUseCase(data = _portfolio.value)

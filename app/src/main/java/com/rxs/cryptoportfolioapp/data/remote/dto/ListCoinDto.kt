@@ -1,6 +1,6 @@
 package com.rxs.cryptoportfolioapp.data.remote.dto
 
-import com.rxs.cryptoportfolio.domain.model.Coin
+import com.rxs.cryptoportfolioapp.domain.model.Coin
 
 data class ListCoinDto(
     val data: List<Data>,
@@ -12,6 +12,7 @@ fun ListCoinDto.toCoinList(): List<Coin> {
     data.map {
         coinList.add(
             Coin(
+                name = it.name,
                 symbol = it.symbol,
                 price = it.quote.USD.price,
                 percentChange24 = (it.quote.USD.percent_change_24h * 100.0).toInt() / 100.0

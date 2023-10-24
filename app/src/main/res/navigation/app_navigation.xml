@@ -6,13 +6,13 @@
     app:startDestination="@id/portfolioFragment">
 
     <fragment
-        android:id="@+id/newAssetFragment"
-        android:name="com.rxs.cryptoportfolioapp.NewAssetFragment"
+        android:id="@+id/newAsseCoinFragment"
+        android:name="com.rxs.cryptoportfolioapp.NewAssetCoinFragment"
         android:label="fragment_new_asset"
-        tools:layout="@layout/fragment_new_asset" >
+        tools:layout="@layout/fragment_new_asset_coin" >
         <action
             android:id="@+id/action_newAssetFragment_to_newAssetValueFragment"
-            app:destination="@id/newAssetValueFragment" />
+            app:destination="@id/newAssetBuyValueFragment" />
     </fragment>
 
     <fragment
@@ -45,9 +45,24 @@
         android:name="com.rxs.cryptoportfolioapp.presentation.portfolio.WithdrawDialogFragment"
         android:label="fragment_withdraw_dialog"
         tools:layout="@layout/fragment_withdraw_dialog" />
+
     <fragment
-        android:id="@+id/newAssetValueFragment"
-        android:name="com.rxs.cryptoportfolioapp.NewAssetValueFragment"
+        android:id="@+id/newAssetBuyValueFragment"
+        android:name="com.rxs.cryptoportfolioapp.NewAssetBuyValueFragment"
         android:label="fragment_new_asset_value"
-        tools:layout="@layout/fragment_new_asset_value" />
+        tools:layout="@layout/fragment_new_asset_buy_value" >
+        <action
+            android:id="@+id/action_newAssetBuyValueFragment_to_newAssetSellValueFragment"
+            app:destination="@id/newAssetSellValueFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newAssetSellValueFragment"
+        android:name="com.rxs.cryptoportfolioapp.NewAssetSellValueFragment"
+        android:label="fragment_new_asset_sell_value"
+        tools:layout="@layout/fragment_new_asset_sell_value" >
+        <action
+            android:id="@+id/action_newAssetSellValueFragment_to_newAssetBuyValueFragment"
+            app:destination="@id/newAssetBuyValueFragment" />
+    </fragment>
 </navigation>

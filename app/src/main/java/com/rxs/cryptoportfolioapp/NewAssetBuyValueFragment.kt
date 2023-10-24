@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class NewAssetValueFragment : Fragment() {
+class NewAssetBuyValueFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_new_asset_value, container, false)
+        return inflater.inflate(R.layout.fragment_new_asset_buy_value, container, false)
     }
 }

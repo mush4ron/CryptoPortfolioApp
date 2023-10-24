@@ -38,8 +38,9 @@ class InvestDialogFragment : DialogFragment() {
         binding.apply {
             btnDialogInvestInvest.setOnClickListener {
                 val value = binding.etDialogInvestValue.text.toString()
-                if (value.isNotBlank()) {
-                    viewModel.addBalance(value = value.toInt())
+                val valueUsdt = binding.etDialogInvestUsdtValue.text.toString()
+                if (value.isNotBlank() && valueUsdt.isNotBlank()) {
+                    viewModel.addBalance(value = value.toInt(), valueUsdt.toDouble())
                 }
                 dismiss()
             }

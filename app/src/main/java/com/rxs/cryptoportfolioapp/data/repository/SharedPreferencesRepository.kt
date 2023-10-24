@@ -3,7 +3,7 @@ package com.rxs.cryptoportfolioapp.data.repository
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.rxs.cryptoportfolioapp.common.Constants
-import com.rxs.cryptoportfolioapp.data.sharedprefs.Portfolio
+import com.rxs.cryptoportfolioapp.data.shared_prefs.Portfolio
 import com.rxs.cryptoportfolioapp.domain.repository.DataRepository
 import javax.inject.Inject
 

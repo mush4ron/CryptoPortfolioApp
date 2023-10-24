@@ -72,6 +72,16 @@
         <item name="backgroundTint">@color/purple</item>
     </style>
 
+    <style name="RedLightButton" parent="BaseButton">
+        <item name="backgroundTint">@color/red_light</item>
+        <item name="android:textColor">@color/red_dark</item>
+    </style>
+
+    <style name="GreenLightButton" parent="BaseButton">
+        <item name="backgroundTint">@color/green_light</item>
+        <item name="android:textColor">@color/green_dark</item>
+    </style>
+
 
     <!-- Bottom Menu -->
     <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView.Colored">

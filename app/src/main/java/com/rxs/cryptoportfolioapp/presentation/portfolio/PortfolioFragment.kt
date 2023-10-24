@@ -12,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.util.Locale
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class PortfolioFragment : Fragment() {
@@ -38,7 +39,21 @@ class PortfolioFragment : Fragment() {
 
     private fun startObserve() {
         viewModel.portfolio.observe(viewLifecycleOwner) {
-            binding.tvFragmentPortfolioInvestedBalance.text = it.balance.toBalanceText()
+            binding.apply {
+                tvFragmentPortfolioInvestedBalance.text =
+                    it.balance.toRussianCurrencyText()
+
+                val usdtBalance = if (it.averageUsdt != 0.0) {
+                    (((it.balance / it.averageUsdt) * 100.0).roundToInt() / 100.0)
+                } else {
+                    0.0
+                }.toUsdtText()
+                tvFragmentPortfolioInvestedUsdtBalance.text = usdtBalance
+
+                val rate = "1 USDT = ${it.averageUsdt.toRussianCurrencyText()}"
+                tvFragmentPortfolioInvestedRate.text = rate
+            }
+
         }
     }
 
@@ -55,7 +70,18 @@ class PortfolioFragment : Fragment() {
     }
 }
 
-fun Int.toBalanceText(): String {
+fun Int.toRussianCurrencyText(): String {
     val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))
     return "${numberFormat.format(this)} ₽"
 }
+
+fun Double.toRussianCurrencyText(): String {
+    val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))
+    return "${numberFormat.format(this)} ₽"
+}
+
+fun Double.toUsdtText(): String {
+    val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))
+    return "${numberFormat.format(this)} USDT"
+}
+

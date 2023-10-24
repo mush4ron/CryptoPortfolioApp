@@ -7,5 +7,6 @@
     <style name="Theme.CryptoPortfolioApp" parent="Base.Theme.CryptoPortfolioApp">
         <item name="bottomNavigationStyle">@style/BottomNavigationViewStyle</item>
         <item name="android:editTextColor">@color/white</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>

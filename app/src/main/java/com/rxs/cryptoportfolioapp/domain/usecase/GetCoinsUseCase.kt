@@ -1,6 +1,6 @@
 package com.rxs.cryptoportfolioapp.domain.usecase
 
-import com.rxs.cryptoportfolio.domain.model.Coin
+import com.rxs.cryptoportfolioapp.domain.model.Coin
 import com.rxs.cryptoportfolioapp.common.DispatcherProvider
 import com.rxs.cryptoportfolioapp.common.Resource
 import com.rxs.cryptoportfolioapp.data.remote.dto.toCoinList

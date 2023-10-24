@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        applicationContext.getSharedPreferences(Constants.SHARED_KEY, 0).edit().clear().apply()
+        applicationContext.getSharedPreferences(Constants.SHARED_KEY, 0).edit().clear().apply()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

@@ -27,14 +27,13 @@
 
         <EditText
             android:id="@+id/et_dialog_invest_value"
+            style="@style/CustomEditText"
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/shape_edittext"
             android:ems="10"
             android:hint="5000 ₽"
             android:inputType="number|numberSigned"
-            android:paddingStart="12dp"
             app:layout_constraintEnd_toEndOf="@+id/btn_dialog_invest_invest"
             app:layout_constraintStart_toStartOf="@+id/btn_dialog_invest_back"
             app:layout_constraintTop_toBottomOf="@+id/tv_dialog_invest_title1" />
@@ -86,14 +85,13 @@
 
         <EditText
             android:id="@+id/et_dialog_invest_usdt_value"
+            style="@style/CustomEditText"
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/shape_edittext"
             android:ems="10"
             android:hint="50 USDT"
             android:inputType="number|numberDecimal"
-            android:paddingStart="12dp"
             app:layout_constraintEnd_toEndOf="@+id/btn_dialog_invest_invest"
             app:layout_constraintStart_toStartOf="@+id/btn_dialog_invest_back"
             app:layout_constraintTop_toBottomOf="@+id/tv_dialog_invest_title2" />

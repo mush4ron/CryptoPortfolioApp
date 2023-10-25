@@ -96,4 +96,9 @@
         <item name="searchIcon">@drawable/ic_search</item>
         <item name="iconifiedByDefault">false</item>
     </style>
+
+    <style name="CustomEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/shape_edittext</item>
+        <item name="android:paddingStart">12dp</item>
+    </style>
 </resources>

@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.rxs.cryptoportfolioapp.R
+import com.rxs.cryptoportfolioapp.common.toRussianFormatAverageRate
+import com.rxs.cryptoportfolioapp.common.toRussianCurrencyPortfolioBalance
+import com.rxs.cryptoportfolioapp.common.toUsdtPortfolioBalance
 import com.rxs.cryptoportfolioapp.databinding.FragmentPortfolioBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.NumberFormat
-import java.util.Locale
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -41,16 +42,16 @@ class PortfolioFragment : Fragment() {
         viewModel.portfolio.observe(viewLifecycleOwner) {
             binding.apply {
                 tvFragmentPortfolioInvestedBalance.text =
-                    it.balance.toRussianCurrencyText()
+                    it.balance.toRussianCurrencyPortfolioBalance()
 
                 val usdtBalance = if (it.averageUsdt != 0.0) {
                     (((it.balance / it.averageUsdt) * 100.0).roundToInt() / 100.0)
                 } else {
                     0.0
-                }.toUsdtText()
+                }.toUsdtPortfolioBalance()
                 tvFragmentPortfolioInvestedUsdtBalance.text = usdtBalance
 
-                val rate = "1 USDT = ${it.averageUsdt.toRussianCurrencyText()}"
+                val rate = "1 USDT = ${it.averageUsdt.toRussianFormatAverageRate()}"
                 tvFragmentPortfolioInvestedRate.text = rate
             }
 
@@ -59,29 +60,16 @@ class PortfolioFragment : Fragment() {
 
     private fun setupView() {
         binding.btnFragmentPortfolioInvest.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_portfolioFragment_to_investDialogFragment)
+            Navigation.createNavigateOnClickListener(
+                R.id.action_portfolioFragment_to_investDialogFragment
+            ).onClick(it)
         }
 
         binding.btnFragmentPortfolioWithdraw.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_portfolioFragment_to_withdrawDialogFragment)
+            Navigation.createNavigateOnClickListener(
+                R.id.action_portfolioFragment_to_withdrawDialogFragment
+            ).onClick(it)
         }
     }
-}
-
-fun Int.toRussianCurrencyText(): String {
-    val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))
-    return "${numberFormat.format(this)} ₽"
-}
-
-fun Double.toRussianCurrencyText(): String {
-    val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))
-    return "${numberFormat.format(this)} ₽"
-}
-
-fun Double.toUsdtText(): String {
-    val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))
-    return "${numberFormat.format(this)} USDT"
 }
 

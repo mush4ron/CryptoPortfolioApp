@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.rxs.cryptoportfolioapp.common.toRankingPrice
 import com.rxs.cryptoportfolioapp.domain.model.Coin
 import com.rxs.cryptoportfolioapp.databinding.ItemRankingListBinding
 import java.text.NumberFormat
@@ -22,10 +23,8 @@ class RankingListAdapter @Inject constructor() :
         fun setData(coin: Coin, position: Int) = binding.apply {
             tvItemRankingListPosition.text = (position + 1).toString()
             tvItemRankingListSymbol.text = coin.symbol
-            val numberFormat = NumberFormat.getCurrencyInstance(Locale.US)
-            if ((coin.price * 10000).toInt() <= 0) numberFormat.maximumFractionDigits = 8
-            else if (coin.price.toInt() <= 0) numberFormat.maximumFractionDigits = 4
-            tvItemRankingListPrice.text = numberFormat.format(coin.price)
+            tvItemRankingListPrice.text = coin.price.toRankingPrice()
+
             if (coin.percentChange24 >= 0) {
                 tvItemRankingListChange24Bad.visibility = View.GONE
                 tvItemRankingListChange24Good.text = "${coin.percentChange24}%"

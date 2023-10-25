@@ -28,10 +28,10 @@
 
         <EditText
             android:id="@+id/et_dialog_withdraw_value"
+            style="@style/CustomEditText"
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/shape_edittext"
             android:ems="10"
             android:inputType="number|numberSigned"
             app:layout_constraintEnd_toEndOf="@+id/btn_dialog_withdraw_withdraw"

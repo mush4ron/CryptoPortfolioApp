@@ -24,7 +24,7 @@ class RankingViewModel @Inject constructor(
     }
 
     private fun getCoins() {
-        viewModelScope.launch() {
+        viewModelScope.launch {
             getCoinsUseCase().collect{
                 _coinsData.postValue(it)
             }

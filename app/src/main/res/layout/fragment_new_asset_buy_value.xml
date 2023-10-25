@@ -5,7 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".NewAssetBuyValueFragment">
+    tools:context=".presentation.new_asset.NewAssetBuyValueFragment">
+
+    <ImageView
+        android:id="@+id/iv_fragment_new_asset_buy_value_back"
+        android:layout_width="12dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/ic_arrow"
+        android:backgroundTint="@color/white"
+        android:scaleX="-1"
+        app:layout_constraintBottom_toBottomOf="@+id/cl_fragment_new_asset_buy_value_coin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cl_fragment_new_asset_buy_value_coin" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -130,21 +142,35 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="top"
             android:background="@color/background_support"
             android:paddingTop="32dp">
 
+            <TextView
+                android:id="@+id/tv_fragment_new_asset_buy_value_error"
+                style="@style/Caption1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="70dp"
+                android:text="Все поля должны быть заполнены!"
+                android:textAllCaps="true"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <EditText
                 android:id="@+id/et_fragment_new_asset_buy_value_price_per_coin"
+                style="@style/CustomEditText"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/shape_edittext"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="number|numberDecimal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_fragment_new_asset_buy_value_subtitle2" />
@@ -175,14 +201,14 @@
 
             <EditText
                 android:id="@+id/et_fragment_new_asset_buy_value_count"
+                style="@style/CustomEditText"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/shape_edittext"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="number|numberDecimal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_fragment_new_asset_buy_value_subtitle1" />

@@ -6,55 +6,49 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rxs.cryptoportfolioapp.data.shared_prefs.Portfolio
 import com.rxs.cryptoportfolioapp.domain.usecase.GetPortfolioUseCase
+import com.rxs.cryptoportfolioapp.domain.usecase.PortfolioBalanceUseCase
 import com.rxs.cryptoportfolioapp.domain.usecase.SavePortfolioUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.math.roundToInt
 
 @Singleton
 class PortfolioViewModel @Inject constructor(
     private val getPortfolioUseCase: GetPortfolioUseCase,
-    private val savePortfolioUseCase: SavePortfolioUseCase
+    private val portfolioBalanceUseCase: PortfolioBalanceUseCase
 ) : ViewModel() {
 
     private val _portfolio = MutableLiveData<Portfolio>()
     val portfolio: LiveData<Portfolio> = _portfolio
 
     init {
+        getPortfolio()
+    }
+
+    fun investBalance(investedValue: Int, boughtUst: Double) {
+        viewModelScope.launch {
+            _portfolio.postValue(
+                portfolioBalanceUseCase.investBalance(
+                    investedValue = investedValue,
+                    boughtUst = boughtUst
+                )
+            )
+        }
+    }
+
+    fun withdrawBalance(withdrawValue: Int) {
+        viewModelScope.launch {
+            _portfolio.postValue(
+                portfolioBalanceUseCase.withdrawBalance(
+                    withdrawValue = withdrawValue
+                )
+            )
+        }
+    }
+
+    private fun getPortfolio() {
         viewModelScope.launch {
             _portfolio.value = getPortfolioUseCase()!!
-        }
-    }
-
-
-    fun addBalance(value: Int, valueUsdt: Double) {
-        val newBalance = _portfolio.value!!.balance.plus(value)
-        val oldUsdtBalance = if (_portfolio.value!!.averageUsdt != 0.0) {
-            _portfolio.value!!.balance / _portfolio.value!!.averageUsdt
-        } else {
-            0.0
-        }
-        val newAverageUsdt =
-            (newBalance / (oldUsdtBalance + valueUsdt) * 100.0).roundToInt() / 100.0
-
-        _portfolio.value =
-            Portfolio(balance = newBalance, averageUsdt = newAverageUsdt)
-
-        viewModelScope.launch {
-            savePortfolioUseCase(data = _portfolio.value)
-        }
-    }
-
-    fun withdrawBalance(value: Int) {
-        val newBalance = _portfolio.value!!.balance.plus(value)
-        val averageUsdt = _portfolio.value!!.averageUsdt
-
-        _portfolio.value =
-            Portfolio(balance = newBalance, averageUsdt = averageUsdt)
-
-        viewModelScope.launch {
-            savePortfolioUseCase(data = _portfolio.value)
         }
     }
 }

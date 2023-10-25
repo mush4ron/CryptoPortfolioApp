@@ -40,7 +40,10 @@ class InvestDialogFragment : DialogFragment() {
                 val value = binding.etDialogInvestValue.text.toString()
                 val valueUsdt = binding.etDialogInvestUsdtValue.text.toString()
                 if (value.isNotBlank() && valueUsdt.isNotBlank()) {
-                    viewModel.addBalance(value = value.toInt(), valueUsdt.toDouble())
+                    viewModel.investBalance(
+                        investedValue = value.toInt(),
+                        boughtUst = valueUsdt.toDouble()
+                    )
                 }
                 dismiss()
             }

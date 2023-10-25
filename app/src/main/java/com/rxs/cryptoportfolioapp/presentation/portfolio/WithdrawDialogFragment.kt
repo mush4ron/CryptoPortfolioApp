@@ -39,7 +39,7 @@ class WithdrawDialogFragment : DialogFragment() {
             btnDialogWithdrawWithdraw.setOnClickListener {
                 val value = binding.etDialogWithdrawValue.text.toString()
                 if (value.isNotBlank()) {
-                    viewModel.withdrawBalance(value = value.toInt())
+                    viewModel.withdrawBalance(withdrawValue = value.toInt())
                 }
                 dismiss()
             }

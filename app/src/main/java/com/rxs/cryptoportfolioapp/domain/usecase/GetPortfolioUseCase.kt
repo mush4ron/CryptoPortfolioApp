@@ -13,7 +13,7 @@ class GetPortfolioUseCase @Inject constructor(
 
     suspend operator fun invoke(): Portfolio {
         return withContext(dispatcherProvider.io) {
-            repository.get() ?: Portfolio()
+            repository.get()
         }
     }
 }

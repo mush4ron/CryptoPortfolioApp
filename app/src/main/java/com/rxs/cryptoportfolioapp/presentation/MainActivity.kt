@@ -1,7 +1,9 @@
 package com.rxs.cryptoportfolioapp.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.rxs.cryptoportfolioapp.R
@@ -24,7 +26,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomMenu() {
-        supportFragmentManager.findFragmentById(R.id.fragmentContainerView)?.findNavController()
-            ?.let { binding.bottomNavigationView.setupWithNavController(it) }
+        val navController =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView)?.findNavController()
+        if (navController != null) {
+            binding.bottomNavigationView.setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.portfolioFragment -> {
+                        navController.navigate(R.id.portfolioFragment)
+                    }
+
+                    R.id.newAssetCoinFragment -> {
+                        navController.navigate(R.id.newAssetCoinFragment)
+                    }
+
+                    R.id.rankingFragment -> {
+                        navController.navigate(R.id.rankingFragment)
+                    }
+                }
+                true
+            }
+        }
     }
 }

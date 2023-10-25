@@ -6,12 +6,12 @@
     app:startDestination="@id/portfolioFragment">
 
     <fragment
-        android:id="@+id/newAsseCoinFragment"
-        android:name="com.rxs.cryptoportfolioapp.NewAssetCoinFragment"
+        android:id="@+id/newAssetCoinFragment"
+        android:name="com.rxs.cryptoportfolioapp.presentation.new_asset.NewAssetCoinFragment"
         android:label="fragment_new_asset"
-        tools:layout="@layout/fragment_new_asset_coin" >
+        tools:layout="@layout/fragment_new_asset_coin">
         <action
-            android:id="@+id/action_newAssetFragment_to_newAssetValueFragment"
+            android:id="@+id/action_newAssetCoinFragment_to_newAssetBuyValueFragment"
             app:destination="@id/newAssetBuyValueFragment" />
     </fragment>
 
@@ -48,21 +48,30 @@
 
     <fragment
         android:id="@+id/newAssetBuyValueFragment"
-        android:name="com.rxs.cryptoportfolioapp.NewAssetBuyValueFragment"
+        android:name="com.rxs.cryptoportfolioapp.presentation.new_asset.NewAssetBuyValueFragment"
         android:label="fragment_new_asset_value"
-        tools:layout="@layout/fragment_new_asset_buy_value" >
+        tools:layout="@layout/fragment_new_asset_buy_value">
         <action
             android:id="@+id/action_newAssetBuyValueFragment_to_newAssetSellValueFragment"
             app:destination="@id/newAssetSellValueFragment" />
+        <action
+            android:id="@+id/action_newAssetBuyValueFragment_to_newAssetCoinFragment"
+            app:destination="@id/newAssetCoinFragment" />
+        <action
+            android:id="@+id/action_newAssetBuyValueFragment_to_portfolioFragment"
+            app:destination="@id/portfolioFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/newAssetSellValueFragment"
-        android:name="com.rxs.cryptoportfolioapp.NewAssetSellValueFragment"
+        android:name="com.rxs.cryptoportfolioapp.presentation.new_asset.NewAssetSellValueFragment"
         android:label="fragment_new_asset_sell_value"
-        tools:layout="@layout/fragment_new_asset_sell_value" >
+        tools:layout="@layout/fragment_new_asset_sell_value">
         <action
             android:id="@+id/action_newAssetSellValueFragment_to_newAssetBuyValueFragment"
             app:destination="@id/newAssetBuyValueFragment" />
+        <action
+            android:id="@+id/action_newAssetSellValueFragment_to_newAssetCoinFragment"
+            app:destination="@id/newAssetCoinFragment" />
     </fragment>
 </navigation>

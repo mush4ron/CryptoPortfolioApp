@@ -7,12 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rxs.cryptoportfolioapp.R
 import com.rxs.cryptoportfolioapp.databinding.ItemNewAssetCoinBinding
 import com.rxs.cryptoportfolioapp.domain.model.Coin
-import javax.inject.Inject
 
-class CoinAssetAdapter @Inject constructor(
+class CoinAssetsAdapter constructor(
     private val viewModel: NewAssetViewModel
-) :
-    RecyclerView.Adapter<CoinAssetAdapter.CoinAssetViewHolder>() {
+) : RecyclerView.Adapter<CoinAssetsAdapter.CoinAssetViewHolder>() {
 
     private lateinit var binding: ItemNewAssetCoinBinding
     private var coinsList = emptyList<Coin>()
@@ -57,6 +55,5 @@ class CoinAssetAdapter @Inject constructor(
 
     fun submitData(data: List<Coin>) {
         coinsList = data
-        notifyDataSetChanged()
     }
 }

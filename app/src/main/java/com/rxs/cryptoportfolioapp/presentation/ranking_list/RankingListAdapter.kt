@@ -4,14 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.rxs.cryptoportfolioapp.common.toRankingPrice
-import com.rxs.cryptoportfolioapp.domain.model.Coin
+import com.rxs.cryptoportfolioapp.common.toRankingListPrice
 import com.rxs.cryptoportfolioapp.databinding.ItemRankingListBinding
-import java.text.NumberFormat
-import java.util.Locale
-import javax.inject.Inject
+import com.rxs.cryptoportfolioapp.domain.model.Coin
 
-class RankingListAdapter @Inject constructor() :
+class RankingListAdapter :
     RecyclerView.Adapter<RankingListAdapter.RankingListViewHolder>() {
 
     private lateinit var binding: ItemRankingListBinding
@@ -23,7 +20,7 @@ class RankingListAdapter @Inject constructor() :
         fun setData(coin: Coin, position: Int) = binding.apply {
             tvItemRankingListPosition.text = (position + 1).toString()
             tvItemRankingListSymbol.text = coin.symbol
-            tvItemRankingListPrice.text = coin.price.toRankingPrice()
+            tvItemRankingListPrice.text = coin.price.toRankingListPrice()
 
             if (coin.percentChange24 >= 0) {
                 tvItemRankingListChange24Bad.visibility = View.GONE

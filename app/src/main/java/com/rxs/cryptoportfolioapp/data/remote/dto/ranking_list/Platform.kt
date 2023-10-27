@@ -1,4 +1,4 @@
-package com.rxs.cryptoportfolioapp.data.remote.dto
+package com.rxs.cryptoportfolioapp.data.remote.dto.ranking_list
 
 data class Platform(
     val id: Int,

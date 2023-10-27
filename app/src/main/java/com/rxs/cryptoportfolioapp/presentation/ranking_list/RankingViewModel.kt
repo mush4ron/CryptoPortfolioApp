@@ -23,9 +23,15 @@ class RankingViewModel @Inject constructor(
         getCoins()
     }
 
+    fun getFilteredCoinList(startText: String): List<Coin> {
+        return _coinsData.value?.data?.filter {
+            it.symbol.lowercase().startsWith(startText)
+        } ?: emptyList()
+    }
+
     private fun getCoins() {
         viewModelScope.launch {
-            getCoinsUseCase().collect{
+            getCoinsUseCase.getCoins().collect{
                 _coinsData.postValue(it)
             }
         }

@@ -85,7 +85,7 @@
 
     <!-- Bottom Menu -->
     <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/background</item>
         <item name="itemTextColor">@color/bottom_menu_text</item>
         <item name="itemIconTint">@color/bottom_menu_icon</item>
     </style>

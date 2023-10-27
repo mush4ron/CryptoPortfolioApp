@@ -1,32 +1,32 @@
 package com.rxs.cryptoportfolioapp.presentation.ranking_list
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rxs.cryptoportfolioapp.common.Resource
 import com.rxs.cryptoportfolioapp.databinding.FragmentRankingBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class RankingFragment : Fragment() {
 
     private lateinit var binding: FragmentRankingBinding
+
     private val viewModel: RankingViewModel by viewModels()
 
-    @Inject
-    lateinit var rankingAdapter: RankingListAdapter
+    private lateinit var rankingAdapter: RankingListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRankingBinding.inflate(layoutInflater)
+        rankingAdapter = RankingListAdapter()
         setupView()
         return binding.root
     }
@@ -62,16 +62,40 @@ class RankingFragment : Fragment() {
     }
 
     private fun setupView() {
-        binding.rvFragmentRanking.apply {
-            layoutManager =
-                LinearLayoutManager(
-                    this@RankingFragment.context,
-                    LinearLayoutManager.VERTICAL,
-                    false
-                )
-            adapter = rankingAdapter
+        binding.apply {
+            rvFragmentRanking.apply {
+                layoutManager =
+                    LinearLayoutManager(
+                        this@RankingFragment.context,
+                        LinearLayoutManager.VERTICAL,
+                        false
+                    )
+                adapter = rankingAdapter
+            }
+
+            svFragmentRanking.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (!newText.isNullOrBlank()) {
+                        recreateAdapter()
+                        rankingAdapter.submitData(viewModel.getFilteredCoinList(newText))
+                    } else {
+                        viewModel.coinsData.value?.data?.let {
+                            recreateAdapter()
+                            rankingAdapter.submitData(it)
+                        }
+                    }
+                    return true
+                }
+            })
         }
     }
 
-
+    private fun recreateAdapter() {
+        rankingAdapter = RankingListAdapter()
+        binding.rvFragmentRanking.adapter = rankingAdapter
+    }
 }

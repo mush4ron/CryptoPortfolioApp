@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.rxs.cryptoportfolioapp.data.shared_prefs.Portfolio
 import com.rxs.cryptoportfolioapp.domain.usecase.GetPortfolioUseCase
 import com.rxs.cryptoportfolioapp.domain.usecase.PortfolioBalanceUseCase
-import com.rxs.cryptoportfolioapp.domain.usecase.SavePortfolioUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -46,9 +45,10 @@ class PortfolioViewModel @Inject constructor(
         }
     }
 
-    private fun getPortfolio() {
+    fun getPortfolio() {
         viewModelScope.launch {
-            _portfolio.value = getPortfolioUseCase()!!
+            val sharedPortfolioWithPrices = getPortfolioUseCase.getPortfolioWithCurrentPrices()
+            _portfolio.postValue(sharedPortfolioWithPrices)
         }
     }
 }

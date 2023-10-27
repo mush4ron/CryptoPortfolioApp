@@ -10,10 +10,9 @@ import com.rxs.cryptoportfolioapp.common.toPricePerCoin
 import com.rxs.cryptoportfolioapp.data.shared_prefs.Portfolio
 import com.rxs.cryptoportfolioapp.data.shared_prefs.PortfolioCoin
 import com.rxs.cryptoportfolioapp.domain.model.Coin
-import com.rxs.cryptoportfolioapp.domain.usecase.AssetUseCase
+import com.rxs.cryptoportfolioapp.domain.usecase.AssetTransactionUseCase
 import com.rxs.cryptoportfolioapp.domain.usecase.GetCoinsUseCase
 import com.rxs.cryptoportfolioapp.domain.usecase.GetPortfolioUseCase
-import com.rxs.cryptoportfolioapp.domain.usecase.SavePortfolioUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,15 +20,14 @@ import javax.inject.Singleton
 @Singleton
 class NewAssetViewModel @Inject constructor(
     private val getPortfolioUseCase: GetPortfolioUseCase,
-    private val savePortfolioUseCase: SavePortfolioUseCase,
-    private val assetUseCase: AssetUseCase,
+    private val assetTransactionUseCase: AssetTransactionUseCase,
     private val getCoinsUseCase: GetCoinsUseCase
 ) : ViewModel() {
 
     private val _portfolio = MutableLiveData<Portfolio>()
     val portfolio: LiveData<Portfolio> = _portfolio
-    private val _coins = MutableLiveData<Resource<List<Coin>>>()
-    val coins: LiveData<Resource<List<Coin>>> = _coins
+    private val _coinsData = MutableLiveData<Resource<List<Coin>>>()
+    val coinsData: LiveData<Resource<List<Coin>>> = _coinsData
     private val _newAssetCoin = MutableLiveData<PortfolioCoin>()
     val newAssetCoin: LiveData<PortfolioCoin> = _newAssetCoin
 
@@ -39,35 +37,25 @@ class NewAssetViewModel @Inject constructor(
     }
 
     fun selectCoin(coin: Coin) {
-        _newAssetCoin.value = PortfolioCoin(coin = coin)
+        viewModelScope.launch {
+            _newAssetCoin.postValue(assetTransactionUseCase.getSelectedPortfolioCoin(coin = coin))
+        }
     }
 
-    fun saveTrans(value: Double, investedPrice: Double) {
-        var contains = false
-        val newAssets = _portfolio.value?.assets?.map {
-            if (it.coin!!.name == _newAssetCoin.value?.coin?.name) {
-                it.value?.plus(value)
-                it.investedPrice?.plus(investedPrice)
-                contains = true
-            }
-            it
-        }?.toMutableList()
-
-        if (!!contains) {
-            newAssets?.add(
-                PortfolioCoin(
-                    coin = _newAssetCoin.value?.coin,
-                    value = value,
-                    investedPrice = investedPrice
-                )
+    fun applyTransaction(value: Double, investedPrice: Double) {
+        viewModelScope.launch {
+            assetTransactionUseCase.applyTransaction(
+                value = value,
+                investedPrice = investedPrice,
+                asset = _newAssetCoin.value!!
             )
         }
+    }
 
-        _portfolio.value = Portfolio(
-            balance = _portfolio.value!!.balance,
-            averageUsdt = _portfolio.value!!.averageUsdt,
-            assets = newAssets!!
-        )
+    fun getFilteredCoinList(startText: String): List<Coin> {
+        return _coinsData.value?.data?.filter {
+            it.symbol.lowercase().startsWith(startText)
+        } ?: emptyList()
     }
 
     fun getSelectedCoinPrice(): String {
@@ -78,21 +66,21 @@ class NewAssetViewModel @Inject constructor(
         return selectedDataCoin?.price?.toPricePerCoin() ?: ""
     }
 
-    fun getBalanceByCoinSymbol(): String {
-        return assetUseCase.getBalanceByCoinSymbol(coinSymbol = _newAssetCoin.value!!.coin!!.symbol)
+    fun getCoinBalance(): String {
+        return "${_newAssetCoin.value!!.value.toNewAssetBalance()} ${_newAssetCoin.value!!.coin!!.symbol}"
     }
 
     private fun getCoins() {
         viewModelScope.launch {
-            getCoinsUseCase().collect {
-                _coins.postValue(it)
+            getCoinsUseCase.getCoins().collect {
+                _coinsData.postValue(it)
             }
         }
     }
 
     private fun getPortfolio() {
         viewModelScope.launch {
-            val sharedPortfolio = getPortfolioUseCase()
+            val sharedPortfolio = getPortfolioUseCase.getPortfolio()
             _portfolio.postValue(sharedPortfolio)
         }
     }

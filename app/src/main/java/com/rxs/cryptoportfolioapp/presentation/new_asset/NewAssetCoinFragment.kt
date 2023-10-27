@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rxs.cryptoportfolioapp.common.Resource
@@ -19,14 +20,15 @@ class NewAssetCoinFragment : Fragment() {
     @Inject
     lateinit var viewModel: NewAssetViewModel
 
-    @Inject
-    lateinit var coinAssetAdapter: CoinAssetAdapter
+    private lateinit var coinAssetsAdapter: CoinAssetsAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNewAssetCoinBinding.inflate(layoutInflater)
+        coinAssetsAdapter = CoinAssetsAdapter(viewModel)
         setupView()
 
         return binding.root
@@ -38,14 +40,14 @@ class NewAssetCoinFragment : Fragment() {
     }
 
     private fun startObserve() {
-        viewModel.coins.observe(viewLifecycleOwner) {
+        viewModel.coinsData.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
                     binding.pbFragmentNewAssetCoin.visibility = View.VISIBLE
                 }
 
                 is Resource.Success -> {
-                    it.data?.let { it1 -> coinAssetAdapter.submitData(it1) }
+                    it.data?.let { it1 -> coinAssetsAdapter.submitData(it1) }
                     binding.pbFragmentNewAssetCoin.visibility = View.GONE
                     binding.rvFragmentNewAssetCoin.visibility = View.VISIBLE
                 }
@@ -62,16 +64,41 @@ class NewAssetCoinFragment : Fragment() {
         }
     }
 
-
     private fun setupView() {
-        binding.rvFragmentNewAssetCoin.apply {
-            layoutManager =
-                LinearLayoutManager(
-                    this@NewAssetCoinFragment.context,
-                    LinearLayoutManager.VERTICAL,
-                    false
-                )
-            adapter = coinAssetAdapter
+        binding.apply {
+            rvFragmentNewAssetCoin.apply {
+                layoutManager =
+                    LinearLayoutManager(
+                        this@NewAssetCoinFragment.context,
+                        LinearLayoutManager.VERTICAL,
+                        false
+                    )
+                adapter = coinAssetsAdapter
+            }
+
+            svFragmentNewAssetCoin.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (!newText.isNullOrBlank()) {
+                        recreateAdapter()
+                        coinAssetsAdapter.submitData(viewModel.getFilteredCoinList(newText))
+                    } else {
+                        viewModel.coinsData.value?.data?.let {
+                            recreateAdapter()
+                            coinAssetsAdapter.submitData(it)
+                        }
+                    }
+                    return true
+                }
+            })
         }
+    }
+
+    private fun recreateAdapter() {
+        coinAssetsAdapter = CoinAssetsAdapter(viewModel)
+        binding.rvFragmentNewAssetCoin.adapter = coinAssetsAdapter
     }
 }

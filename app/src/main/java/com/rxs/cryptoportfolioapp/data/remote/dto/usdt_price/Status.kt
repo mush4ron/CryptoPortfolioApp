@@ -1,4 +1,4 @@
-package com.rxs.cryptoportfolioapp.data.remote.dto
+package com.rxs.cryptoportfolioapp.data.remote.dto.usdt_price
 
 data class Status(
     val credit_count: Int,
@@ -6,6 +6,5 @@ data class Status(
     val error_code: Int,
     val error_message: Any,
     val notice: Any,
-    val timestamp: String,
-    val total_count: Int
+    val timestamp: String
 )

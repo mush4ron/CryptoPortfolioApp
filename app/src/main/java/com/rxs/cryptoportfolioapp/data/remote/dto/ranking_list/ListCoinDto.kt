@@ -1,4 +1,4 @@
-package com.rxs.cryptoportfolioapp.data.remote.dto
+package com.rxs.cryptoportfolioapp.data.remote.dto.ranking_list
 
 import com.rxs.cryptoportfolioapp.domain.model.Coin
 

@@ -3,7 +3,40 @@ package com.rxs.cryptoportfolioapp.common
 import java.text.NumberFormat
 import java.util.Locale
 
+private fun convert(): String = ""
 
+
+// Portfolio -> 15 000 ₽
+fun Int.toRussianFormat(): String {
+    val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))
+    numberFormat.maximumFractionDigits = 0
+    return numberFormat.format(this)
+}
+
+// Portfolio -> 99 108,86 ₽
+fun Double.toRussianFormat(): String {
+    val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))
+    numberFormat.maximumFractionDigits = 2
+    return numberFormat.format(this)
+}
+
+// Ranking List -> Цена монеты в курсах
+fun Double.toRankingListPrice(): String {
+    val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))
+    val multipliers = listOf(1, 100, 10000, 1000000, 100000000)
+
+    for (multiplier in multipliers) {
+        val newValue = this * multiplier
+        if (newValue.toInt() > 0) {
+            numberFormat.maximumFractionDigits = multiplier.toString().length + 1
+            return "${numberFormat.format(this)} $"
+        }
+    }
+
+    return ""
+}
+
+// New Asset Buy Value -> Баланс монеты -> 1 000,0001 BTC
 fun Double.toNewAssetBalance(): String {
     val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))
     numberFormat.maximumFractionDigits =
@@ -11,32 +44,7 @@ fun Double.toNewAssetBalance(): String {
     return numberFormat.format(this)
 }
 
-
-fun Int.toRussianCurrencyPortfolioBalance(): String {
-    val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))
-    return "${numberFormat.format(this)} ₽"
-}
-
-fun Double.toRussianFormatAverageRate(): String {
-    val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))
-    return "${numberFormat.format(this)} ₽"
-}
-
-fun Double.toUsdtPortfolioBalance(): String {
-    val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))
-    return "${numberFormat.format(this)} USDT"
-}
-
-fun Double.toRankingPrice(): String {
-    val numberFormat = NumberFormat.getCurrencyInstance(Locale.US)
-    if ((this * 10000).toInt() <= 0) {
-        numberFormat.maximumFractionDigits = 8
-    } else if (this.toInt() <= 0) {
-        numberFormat.maximumFractionDigits = 4
-    }
-    return numberFormat.format(this)
-}
-
+// New Asset Buy Value -> Цена за монету
 fun Double.toPricePerCoin(): String {
     val multipliers = listOf(1, 100, 10000, 1000000, 100000000)
 

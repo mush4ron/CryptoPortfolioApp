@@ -20,6 +20,30 @@ fun Double.toRussianFormat(): String {
     return numberFormat.format(this)
 }
 
+fun Int.toRussianCurrency(): String {
+    return this.toRussianFormat() + " ₽"
+}
+
+fun Double.toRussianCurrency(): String {
+    return this.toRussianFormat() + " ₽"
+}
+
+fun Int.toUsdtCurrency(): String {
+    return this.toRussianFormat() + " USDT"
+}
+
+fun Double.toUsdtCurrency(): String {
+    return this.toRussianFormat() + " USDT"
+}
+
+fun Int.toUsCurrency(): String {
+    return this.toRussianFormat() + " $"
+}
+
+fun Double.toUsCurrency(): String {
+    return this.toRussianFormat() + " $"
+}
+
 // Ranking List -> Цена монеты в курсах
 fun Double.toRankingListPrice(): String {
     val numberFormat = NumberFormat.getNumberInstance(Locale("ru", "RU"))

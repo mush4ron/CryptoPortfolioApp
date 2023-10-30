@@ -5,29 +5,29 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rxs.cryptoportfolioapp.data.shared_prefs.Portfolio
-import com.rxs.cryptoportfolioapp.domain.usecase.GetPortfolioUseCase
-import com.rxs.cryptoportfolioapp.domain.usecase.PortfolioBalanceUseCase
+import com.rxs.cryptoportfolioapp.domain.usecase.PortfolioBalanceChangeUseCase
+import com.rxs.cryptoportfolioapp.domain.usecase.PortfolioCurrentInfoUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class PortfolioViewModel @Inject constructor(
-    private val getPortfolioUseCase: GetPortfolioUseCase,
-    private val portfolioBalanceUseCase: PortfolioBalanceUseCase
+    private val portfolioCurrentInfoUseCase: PortfolioCurrentInfoUseCase,
+    private val portfolioBalanceChangeUseCase: PortfolioBalanceChangeUseCase
 ) : ViewModel() {
 
     private val _portfolio = MutableLiveData<Portfolio>()
     val portfolio: LiveData<Portfolio> = _portfolio
 
     init {
-        getPortfolio()
+        getCurrentPortfolio()
     }
 
     fun investBalance(investedValue: Int, boughtUst: Double) {
         viewModelScope.launch {
             _portfolio.postValue(
-                portfolioBalanceUseCase.investBalance(
+                portfolioBalanceChangeUseCase.investBalance(
                     investedValue = investedValue,
                     boughtUst = boughtUst
                 )
@@ -38,16 +38,16 @@ class PortfolioViewModel @Inject constructor(
     fun withdrawBalance(withdrawValue: Int) {
         viewModelScope.launch {
             _portfolio.postValue(
-                portfolioBalanceUseCase.withdrawBalance(
+                portfolioBalanceChangeUseCase.withdrawBalance(
                     withdrawValue = withdrawValue
                 )
             )
         }
     }
 
-    fun getPortfolio() {
+    fun getCurrentPortfolio() {
         viewModelScope.launch {
-            val sharedPortfolioWithPrices = getPortfolioUseCase.getPortfolioWithCurrentPrices()
+            val sharedPortfolioWithPrices = portfolioCurrentInfoUseCase.getCurrentPortfolio()
             _portfolio.postValue(sharedPortfolioWithPrices)
         }
     }

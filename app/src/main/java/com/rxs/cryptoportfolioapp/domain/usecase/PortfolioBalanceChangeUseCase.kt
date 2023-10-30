@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
-class PortfolioBalanceUseCase @Inject constructor(
+class PortfolioBalanceChangeUseCase @Inject constructor(
     private val dataRepository: DataRepository,
     private val dispatcherProvider: DispatcherProvider
 ) {
@@ -15,16 +15,17 @@ class PortfolioBalanceUseCase @Inject constructor(
     suspend fun investBalance(investedValue: Int, boughtUst: Double): Portfolio {
         return withContext(dispatcherProvider.io) {
             val sharedPortfolio = dataRepository.get()
-            val oldBalance = sharedPortfolio.balance
+            val oldBalance = sharedPortfolio.invRusBalance
             val oldAverageUsdt = sharedPortfolio.averageUsdt
             val oldUsdtBalance = if (oldAverageUsdt != 0.0) (oldBalance / oldAverageUsdt) else 0.0
 
-            val newBalance = sharedPortfolio.balance.plus(investedValue)
+            val newRusBalance = sharedPortfolio.invRusBalance.plus(investedValue)
             val newUsdtBalance = oldUsdtBalance.plus(boughtUst)
-            val newAverageUsdt = ((newBalance / newUsdtBalance) * 100.0).roundToInt() / 100.0
+            val newAverageUsdt = ((newRusBalance / newUsdtBalance) * 100.0).roundToInt() / 100.0
 
             sharedPortfolio.apply {
-                balance = newBalance
+                invRusBalance = newRusBalance
+                invUsdtBalance = newUsdtBalance
                 averageUsdt = newAverageUsdt
             }
 
@@ -36,13 +37,18 @@ class PortfolioBalanceUseCase @Inject constructor(
     suspend fun withdrawBalance(withdrawValue: Int): Portfolio {
         return withContext(dispatcherProvider.io) {
             val sharedPortfolio = dataRepository.get()
-            val newBalance = sharedPortfolio.balance.minus(withdrawValue)
 
-            sharedPortfolio.apply {
-                balance = newBalance
+            if (withdrawValue <= sharedPortfolio.invRusBalance) {
+                val newBalance = sharedPortfolio.invRusBalance.minus(withdrawValue)
+                sharedPortfolio.apply {
+                    invRusBalance = if (newBalance == 0) 0 else newBalance
+                    invUsdtBalance = if (newBalance == 0) 0.0 else newBalance / averageUsdt
+                    averageUsdt = if (newBalance == 0) 0.0 else averageUsdt
+                }
+
+                dataRepository.save(data = sharedPortfolio)
             }
 
-            dataRepository.save(data = sharedPortfolio)
             sharedPortfolio
         }
     }

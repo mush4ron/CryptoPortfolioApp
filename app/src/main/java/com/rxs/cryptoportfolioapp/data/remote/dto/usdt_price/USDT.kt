@@ -18,7 +18,7 @@ data class USDT(
     val self_reported_market_cap: Any,
     val slug: String,
     val symbol: String,
-    val tags: List<Tag>,
+    val tags: List<String>,
     val total_supply: Double,
     val tvl_ratio: Any
 )

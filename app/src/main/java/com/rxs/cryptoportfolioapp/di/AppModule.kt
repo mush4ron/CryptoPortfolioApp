@@ -1,25 +1,17 @@
 package com.rxs.cryptoportfolioapp.di
 
-import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import com.rxs.cryptoportfolioapp.R
-import com.rxs.cryptoportfolioapp.domain.repository.CoinRepository
 import com.rxs.cryptoportfolioapp.common.Constants
 import com.rxs.cryptoportfolioapp.data.remote.CoinMarketCapApi
 import com.rxs.cryptoportfolioapp.data.repository.CoinRepositoryImpl
 import com.rxs.cryptoportfolioapp.data.repository.SharedPreferencesRepository
+import com.rxs.cryptoportfolioapp.domain.repository.CoinRepository
 import com.rxs.cryptoportfolioapp.domain.repository.DataRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.FragmentScoped
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

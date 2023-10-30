@@ -42,6 +42,7 @@ class WithdrawDialogFragment : DialogFragment() {
                     viewModel.withdrawBalance(withdrawValue = value.toInt())
                 }
                 dismiss()
+                viewModel.getCurrentPortfolio()
             }
 
             btnDialogWithdrawBack.setOnClickListener {

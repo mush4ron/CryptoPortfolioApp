@@ -13,8 +13,9 @@ interface CoinMarketCapApi {
         @Query("limit") limit: String = Constants.COINS_LIMIT
     ): ListCoinDto
 
-    @GET("v1/cryptocurrency/quotes/latest")
+    @GET("/v1/cryptocurrency/quotes/latest")
     suspend fun getUsdtPrice(
+        @Query("CMC_PRO_API_KEY") token: String = Constants.TOKEN,
         @Query("symbol") symbol: String = "USDT",
         @Query("convert") convert: String = "RUB"
     ): PricedUsdtDto

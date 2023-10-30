@@ -46,6 +46,7 @@ class InvestDialogFragment : DialogFragment() {
                     )
                 }
                 dismiss()
+                viewModel.getCurrentPortfolio()
             }
 
             btnDialogInvestBack.setOnClickListener {

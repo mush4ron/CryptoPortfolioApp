@@ -78,6 +78,12 @@ class NewAssetBuyValueFragment : Fragment() {
                     tvFragmentNewAssetBuyValueError.visibility = View.VISIBLE
                 }
             }
+
+            btnFragmentNewAssetBuyValueSell.setOnClickListener {
+                Navigation.createNavigateOnClickListener(
+                    R.id.action_newAssetBuyValueFragment_to_newAssetSellValueFragment
+                ).onClick(it)
+            }
         }
     }
 }

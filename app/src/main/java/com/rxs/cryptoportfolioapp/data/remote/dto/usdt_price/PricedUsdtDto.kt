@@ -9,6 +9,6 @@ data class PricedUsdtDto(
 
 fun PricedUsdtDto.toPricedCoin(): PricedUsdt {
     return PricedUsdt(
-        price = data.USDT[0].quote.RUB.price
+        price = data.USDT.quote.RUB.price
     )
 }

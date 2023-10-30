@@ -26,10 +26,4 @@ class GetCoinsUseCase @Inject constructor(
             emit(Resource.Error(message = e.message ?: "Exception"))
         }
     }.flowOn(dispatcherProvider.io)
-
-    suspend fun getUsdtPrice(): Double {
-        return withContext(dispatcherProvider.io) {
-            repository.getUsdtPrice().toPricedCoin().price
-        }
-    }
 }

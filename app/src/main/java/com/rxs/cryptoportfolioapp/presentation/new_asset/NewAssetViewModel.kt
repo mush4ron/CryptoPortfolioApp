@@ -42,7 +42,7 @@ class NewAssetViewModel @Inject constructor(
         }
     }
 
-    fun applyTransaction(value: Double, investedPrice: Double) {
+    fun applyTransaction(value: Double, investedPrice: Double? = null) {
         viewModelScope.launch {
             assetTransactionUseCase.applyTransaction(
                 value = value,

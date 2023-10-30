@@ -1,6 +1,7 @@
 package com.rxs.cryptoportfolioapp.presentation.portfolio
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rxs.cryptoportfolioapp.R
+import com.rxs.cryptoportfolioapp.common.toRussianCurrency
 import com.rxs.cryptoportfolioapp.common.toRussianFormat
+import com.rxs.cryptoportfolioapp.common.toUsdtCurrency
 import com.rxs.cryptoportfolioapp.databinding.FragmentPortfolioBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -38,25 +41,40 @@ class PortfolioFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getPortfolio()
+        viewModel.getCurrentPortfolio()
         startObserve()
     }
 
     private fun startObserve() {
         viewModel.portfolio.observe(viewLifecycleOwner) {
             binding.apply {
-                tvFragmentPortfolioInvestedBalance.text =
-                    it.balance.toRussianFormat() + " ₽"
+                tvFragmentPortfolioInvestedBalance.text = it.invRusBalance.toRussianCurrency()
+                tvFragmentPortfolioInvestedUsdtBalance.text = it.invUsdtBalance.toUsdtCurrency()
+                tvFragmentPortfolioInvestedRate.text =
+                    "1 USDT = ${it.averageUsdt.toRussianCurrency()}"
 
-                val usdtBalance = if (it.averageUsdt != 0.0) {
-                    (((it.balance / it.averageUsdt) * 100.0).roundToInt() / 100.0)
+                tvFragmentPortfolioCurrentBalance.text = it.curRusBalance.toRussianCurrency()
+                tvFragmentPortfolioCurrentUsdtBalance.text = it.curUsdtBalance.toUsdtCurrency()
+                tvFragmentPortfolioCurrentRate.text =
+                    "1 USDT = ${it.usdtPrice.toRussianCurrency()}"
+
+                if (it.rusProfitLoss >= 0) {
+                    tvFragmentPortfolioCurrentDifferenceBad.visibility = View.GONE
+                    tvFragmentPortfolioCurrentDifferenceBadPercent.visibility = View.GONE
+
+                    tvFragmentPortfolioCurrentDifferenceGood.text = it.rusProfitLoss.toRussianCurrency()
+                    tvFragmentPortfolioCurrentDifferenceGood.visibility = View.VISIBLE
+                    tvFragmentPortfolioCurrentDifferenceGoodPercent.text = it.profitLossPercent
+                    tvFragmentPortfolioCurrentDifferenceGoodPercent.visibility = View.VISIBLE
                 } else {
-                    0.0
-                }.toRussianFormat() + " USDT"
-                tvFragmentPortfolioInvestedUsdtBalance.text = usdtBalance
+                    tvFragmentPortfolioCurrentDifferenceGood.visibility = View.GONE
+                    tvFragmentPortfolioCurrentDifferenceGoodPercent.visibility = View.GONE
 
-                val rate = "1 USDT = ${it.averageUsdt.toRussianFormat()} ₽"
-                tvFragmentPortfolioInvestedRate.text = rate
+                    tvFragmentPortfolioCurrentDifferenceBad.text = it.rusProfitLoss.toRussianCurrency()
+                    tvFragmentPortfolioCurrentDifferenceBad.visibility = View.VISIBLE
+                    tvFragmentPortfolioCurrentDifferenceBadPercent.text = it.profitLossPercent
+                    tvFragmentPortfolioCurrentDifferenceBadPercent.visibility = View.VISIBLE
+                }
 
                 if (it.assets.size > 0) {
                     tvFragmentPortfolioEmptyPortfolioTitle.visibility = View.GONE
@@ -68,7 +86,6 @@ class PortfolioFragment : Fragment() {
                     tvFragmentPortfolioEmptyPortfolioTitle.visibility = View.VISIBLE
                 }
             }
-
         }
     }
 

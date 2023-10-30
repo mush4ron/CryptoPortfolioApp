@@ -26,7 +26,7 @@ class AssetTransactionUseCase @Inject constructor(
 
     suspend fun applyTransaction(
         value: Double,
-        investedPrice: Double,
+        investedPrice: Double?,
         asset: PortfolioCoin
     ): Portfolio {
         return withContext(dispatcherProvider.io) {
@@ -35,9 +35,18 @@ class AssetTransactionUseCase @Inject constructor(
                 it.coin?.symbol == asset.coin?.symbol
             }.let { sharedPortfolio.assets.remove(it) }
 
-            asset.value = asset.value.plus(value)
-            asset.investedPrice = asset.investedPrice.plus(investedPrice) / asset.value
-            sharedPortfolio.assets.add(asset)
+            if (investedPrice == null) {
+                if (asset.value >= value) {
+                    asset.value = asset.value.minus(value)
+                }
+                if (asset.value != 0.0) {
+                    sharedPortfolio.assets.add(asset)
+                }
+            } else {
+                asset.value = asset.value.plus(value)
+                asset.investedPrice = (asset.investedPrice * asset.value).plus(investedPrice * value) / asset.value
+                sharedPortfolio.assets.add(asset)
+            }
 
             dataRepository.save(data = sharedPortfolio)
             sharedPortfolio

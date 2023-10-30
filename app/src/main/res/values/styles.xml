@@ -31,9 +31,6 @@
         <item name="lineHeight">16sp</item>
     </style>
 
-
-    <!-- Item Ranking List -->
-
     <style name="GoodChange" parent="Caption2">
         <item name="android:background">@drawable/shape_element</item>
         <item name="backgroundTint">@color/green_light</item>
@@ -82,14 +79,13 @@
         <item name="android:textColor">@color/green_dark</item>
     </style>
 
+    <!-- Others -->
 
-    <!-- Bottom Menu -->
     <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
         <item name="android:background">@color/background</item>
         <item name="itemTextColor">@color/bottom_menu_text</item>
         <item name="itemIconTint">@color/bottom_menu_icon</item>
     </style>
-
 
     <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
         <item name="android:background">@drawable/shape_edittext</item>
@@ -101,4 +97,5 @@
         <item name="android:background">@drawable/shape_edittext</item>
         <item name="android:paddingStart">12dp</item>
     </style>
+
 </resources>

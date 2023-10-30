@@ -4,8 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.rxs.cryptoportfolioapp.R
-import com.rxs.cryptoportfolioapp.common.toRussianFormat
+import com.rxs.cryptoportfolioapp.common.toNewAssetBalance
+import com.rxs.cryptoportfolioapp.common.toUsCurrency
+import com.rxs.cryptoportfolioapp.common.toUsdtCurrency
 import com.rxs.cryptoportfolioapp.data.shared_prefs.PortfolioCoin
 import com.rxs.cryptoportfolioapp.databinding.ItemPortfolioAssetBinding
 
@@ -22,25 +23,20 @@ class PortfolioAssetsAdapter :
             portfolioCoin.apply {
                 tvItemPortfolioAssetPosition.text = (position + 1).toString()
                 tvItemPortfolioAssetSymbol.text = coin?.symbol ?: ""
-                tvItemPortfolioAssetValue.text = value.toString()
-                tvItemPortfolioAssetInvestedPrice.text =
-                    "${(investedPrice * value).toRussianFormat()} $"
-                tvItemPortfolioAssetCurrentPrice.text =
-                    "${(currentPrice * value).toRussianFormat()} $"
+                tvItemPortfolioAssetValue.text = value.toNewAssetBalance()
+                tvItemPortfolioAssetInvestedPrice.text = (investedPrice * value).toUsdtCurrency()
+                tvItemPortfolioAssetCurrentPrice.text = (currentPrice * value).toUsCurrency()
                 if (profitLoss >= 0) {
                     tvItemPortfolioAssetDifferenceBad.visibility = View.GONE
-                    tvItemPortfolioAssetDifferenceGood.text = "${profitLoss.toRussianFormat()} $"
+                    tvItemPortfolioAssetDifferenceGood.text = profitLoss.toUsdtCurrency()
                     tvItemPortfolioAssetDifferenceGood.visibility = View.VISIBLE
                 } else {
                     tvItemPortfolioAssetDifferenceGood.visibility = View.GONE
-                    tvItemPortfolioAssetDifferenceBad.text = "${profitLoss.toRussianFormat()} $"
+                    tvItemPortfolioAssetDifferenceBad.text = profitLoss.toUsdtCurrency()
                     tvItemPortfolioAssetDifferenceBad.visibility = View.VISIBLE
                 }
-
             }
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PortfolioAssetViewHolder {
